@@ -19,8 +19,9 @@
     // prevent eslint to complain about the "styles" variable being used before it was defined
     "no-use-before-define": ["error", { "variables": false }],
     "quotes": 0,
-    "import/prefer-default-export": "off",
+    "react/prop-types": "off",
+    "import/prefer-default-export": "off"
     // ignore errors for the react-navigation package
-    "react/prop-types": ["error", { "ignore": ["navigation", "navigation.navigate"] }]
+    // "react/prop-types": ["error", { "ignore": ["navigation", "navigation.navigate"] }]
   }
 }
