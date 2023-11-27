@@ -1,5 +1,5 @@
 import { View, FlatList } from "react-native";
-import { Searchbar } from "react-native-paper";
+import { ActivityIndicator, Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
 
 export const SearchContainer = styled(View)`
@@ -14,6 +14,16 @@ export const InputSearchContainer = styled(View)`
 export const RestaurantsScreenSearchbar = styled(Searchbar)`
   flex: 1;
   margin: ${(props) => props.theme.space[3]};
+`;
+
+export const LoadingContainer = styled(View)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+`;
+
+export const LoadingIndicator = styled(ActivityIndicator)`
+  margin-left: -25px;
 `;
 
 export const RestaurantsList = styled(FlatList).attrs({

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable camelcase */
 /* eslint-disable react/style-prop-object */
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
@@ -13,6 +14,8 @@ import { Ionicons } from "@expo/vector-icons";
 import RestaurantsScreen from "./src/features/restaurants/screens/restaurants.screen";
 import { SafeArea } from "./src/components/utilities/safe-area.component";
 import { theme } from "./src/infrastructure/theme";
+import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
+import { LocationContextProvider } from "./src/services/location/location.context";
 
 function Maps() {
   return (
@@ -36,17 +39,15 @@ function Configs() {
 
 const Tab = createBottomTabNavigator();
 
-const defineTabOptions = ({ route }) => ({
-  tabBarIcon: ({ focused, color, size }) => {
-    let iconName;
+const TAB_ICON = {
+  Restaurants: "restaurant",
+  Maps: "map",
+  Configs: "settings",
+};
 
-    if (route.name === "Restaurants") {
-      iconName = "restaurant";
-    } else if (route.name === "Maps") {
-      iconName = "map";
-    } else if (route.name === "Configs") {
-      iconName = "settings";
-    }
+const defineTabOptions = ({ route }) => ({
+  tabBarIcon: ({ color, size }) => {
+    const iconName = TAB_ICON[route.name];
 
     return <Ionicons name={iconName} size={size} color={color} />;
   },
@@ -77,12 +78,16 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <ThemeProvider theme={theme}>
-        <Tabs />
-      </ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <LocationContextProvider>
+        <RestaurantsContextProvider>
+          <NavigationContainer>
+            <Tabs />
 
-      <ExpoStatusBar style="auto" />
-    </NavigationContainer>
+            <ExpoStatusBar style="auto" />
+          </NavigationContainer>
+        </RestaurantsContextProvider>
+      </LocationContextProvider>
+    </ThemeProvider>
   );
 }
