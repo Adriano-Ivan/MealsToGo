@@ -1,35 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { MD2Colors } from "react-native-paper";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
-import {
-  SearchContainer,
-  InputSearchContainer,
-  RestaurantsScreenSearchbar,
-  RestaurantsList,
-  LoadingContainer,
-  LoadingIndicator,
-} from "./restaurants.screen.styles";
+import { RestaurantsList, LoadingContainer, LoadingIndicator } from "./restaurants.screen.styles";
 import { SafeArea } from "../../../components/utilities/safe-area.component";
 import RestaurantInfoCard from "../components/restaurant-info-card.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
+import Search from "../components/search.component";
 
 export default function RestaurantsScreen() {
-  const [text, setText] = useState();
-  const { restaurants, isLoading, error } = useContext(RestaurantsContext);
+  const { restaurants, isLoading } = useContext(RestaurantsContext);
   console.log(restaurants.length);
   return (
     <SafeArea>
-      <SearchContainer>
-        <InputSearchContainer>
-          <RestaurantsScreenSearchbar
-            placeholder="search"
-            value={text}
-            onChangeText={(textI) => {
-              setText(textI);
-            }}
-          />
-        </InputSearchContainer>
-      </SearchContainer>
+      <Search />
       {!isLoading ? (
         <RestaurantsList
           data={restaurants}

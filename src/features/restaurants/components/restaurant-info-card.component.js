@@ -27,6 +27,7 @@ export default function RestaurantInfoCard({ restaurant = {} }) {
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = true,
+    placeId,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.ceil(rating)));
@@ -41,7 +42,7 @@ export default function RestaurantInfoCard({ restaurant = {} }) {
             <StarView>
               {ratingArray.map((_, index) => (
                 // eslint-disable-next-line react/no-array-index-key
-                <SvgXml xml={star} width={20} height={20} key={index} />
+                <SvgXml xml={star} width={20} height={20} key={`star-${placeId}-${index}`} />
               ))}
             </StarView>
             {isClosedTemporarily && <Text variant="caption">CLOSED TEMPORARILY</Text>}

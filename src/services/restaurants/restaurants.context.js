@@ -1,6 +1,8 @@
-import React, { useState, createContext, useEffect, useMemo } from "react";
+/* eslint-disable object-curly-newline */
+import React, { useState, createContext, useEffect, useMemo, useContext } from "react";
 
 import { restaurantsRequest, restaurantsTransform } from "./restaurants.service";
+import { LocationContext } from "../location/location.context";
 
 export const RestaurantsContext = createContext();
 
@@ -8,11 +10,13 @@ export function RestaurantsContextProvider({ children }) {
   const [restaurants, setRestaurants] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { location } = useContext(LocationContext);
 
-  const retrieveRestaurants = () => {
+  const retrieveRestaurants = (locationParam) => {
     setLoading(true);
+    setRestaurants([]);
     setTimeout(() => {
-      restaurantsRequest()
+      restaurantsRequest(locationParam)
         .then(restaurantsTransform)
         .then((restaurantsRes) => {
           setLoading(false);
@@ -26,8 +30,12 @@ export function RestaurantsContextProvider({ children }) {
   };
 
   useEffect(() => {
-    retrieveRestaurants();
-  }, []);
+    if (location) {
+      const locationString = `${location.lat},${location.lng}`;
+      console.log(locationString);
+      retrieveRestaurants(locationString);
+    }
+  }, [location]);
 
   const contextValue = useMemo(
     () => ({ restaurants, isLoading, error }),
