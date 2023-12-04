@@ -1,14 +1,21 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createStackNavigator, TransitionPresets } from "@react-navigation/stack";
 import RestaurantsScreen from "../../features/restaurants/screens/restaurants.screen";
+import RestaurantDetail from "../../features/restaurants/screens/restaurant-detail.screen";
 
 const RestaurantsStack = createStackNavigator();
 
 export function RestaurantsNavigator() {
   return (
-    <RestaurantsStack.Navigator>
-      <RestaurantsStack.Screen name="Restaurants" component={RestaurantsScreen} />
+    <RestaurantsStack.Navigator
+      screenOptions={{
+        headerShown: false,
+        ...TransitionPresets.ModalPresentationIOS,
+      }}
+    >
+      <RestaurantsStack.Screen name="RestaurantsScreen" component={RestaurantsScreen} />
+      <RestaurantsStack.Screen name="RestaurantDetail" component={RestaurantDetail} />
     </RestaurantsStack.Navigator>
   );
 }

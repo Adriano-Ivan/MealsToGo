@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable react/style-prop-object */
+
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View } from "react-native";
@@ -54,7 +54,6 @@ export default function NavigationTabs() {
         <Tab.Screen name="Maps" component={Maps} />
         <Tab.Screen name="Configs" component={Configs} />
       </Tab.Navigator>
-    
     </NavigationContainer>
   );
 }

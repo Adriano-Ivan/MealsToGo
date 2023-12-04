@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable camelcase */
-import 'react-native-gesture-handler';
+/* eslint-disable react/style-prop-object */
+import "react-native-gesture-handler";
 import React from "react";
 import { ThemeProvider } from "styled-components/native";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
@@ -26,16 +27,14 @@ export default function App() {
 
   return (
     <>
-
-<ThemeProvider theme={theme}>
-      <LocationContextProvider>
-        <RestaurantsContextProvider>
-          <Navigation />
-        </RestaurantsContextProvider>
-      </LocationContextProvider>
-    </ThemeProvider>
-<ExpoStatusBar style="auto" />
+      <ThemeProvider theme={theme}>
+        <LocationContextProvider>
+          <RestaurantsContextProvider>
+            <Navigation />
+          </RestaurantsContextProvider>
+        </LocationContextProvider>
+      </ThemeProvider>
+      <ExpoStatusBar style="auto" />
     </>
-
   );
 }
