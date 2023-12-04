@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View } from "react-native";
@@ -8,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeArea } from "../../components/utilities/safe-area.component";
 import { RestaurantsNavigator } from "./restaurants.navigator";
+import { MapsNavigator } from "./maps.navigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,16 +26,6 @@ const defineTabOptions = ({ route }) => ({
   headerShown: false,
 });
 
-function Maps() {
-  return (
-    <SafeArea>
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Maps!</Text>
-      </View>
-    </SafeArea>
-  );
-}
-
 function Configs() {
   return (
     <SafeArea>
@@ -51,7 +41,7 @@ export default function NavigationTabs() {
     <NavigationContainer>
       <Tab.Navigator screenOptions={defineTabOptions}>
         <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
-        <Tab.Screen name="Maps" component={Maps} />
+        <Tab.Screen name="Maps" component={MapsNavigator} />
         <Tab.Screen name="Configs" component={Configs} />
       </Tab.Navigator>
     </NavigationContainer>
